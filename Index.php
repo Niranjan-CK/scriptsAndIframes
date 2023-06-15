@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $html = preg_replace($scriptPattern, '<script src="---"></script>', $html);
             
             $insideScript = '/(<script\b[^>]*>)(.*?(' . preg_quote($search, '/') . ').*?)(<\/script>)/is'; 
-            $html = preg_replace($insideScript, '<script src="---"></script>', $html);
+            $html = preg_replace($insideScript, '<script ></script>', $html);
         }
     }
 
