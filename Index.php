@@ -3,19 +3,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $url = $_POST['url'];
     $html = file_get_contents($url);
-    $searchData =[];
+    
     $searchData = $_POST['links'];
- 
+
     if ($searchData[0]!=="") {
         foreach($searchData as $search) {
             $iframePattern = '/<iframe\b[^>]*\bsrc=[\'"](.*?' . preg_quote($search, '/') . '.*?)[\'"][^>]*>/is';
-            $html = preg_replace($iframePattern, '<iframe src="---"></iframe>', $html);
+            $html = preg_replace($iframePattern, ' ', $html);
 
             $scriptPattern = '/<script\b[^>]*\bsrc=[\'"](.*?' . preg_quote($search, '/') . '.*?)[\'"][^>]*>/is';
-            $html = preg_replace($scriptPattern, '<script src="---"></script>', $html);
+            $html = preg_replace($scriptPattern, ' ', $html);
             
             $insideScript = '/(<script\b[^>]*>)(.*?(' . preg_quote($search, '/') . ').*?)(<\/script>)/is'; 
-            $html = preg_replace($insideScript, '<script ></script>', $html);
+            $html = preg_replace($insideScript, ' ', $html);
         }
     }
     echo $html;
