@@ -3,10 +3,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $url = $_POST['url'];
     $html = file_get_contents($url);
+    $searchData =[];
     $searchData = $_POST['links'];
-
-    if (!empty($searchData)) {
+ 
+    if ($searchData[0]!=="") {
         foreach($searchData as $search) {
+            echo "he";
             $iframePattern = '/<iframe\b[^>]*\bsrc=[\'"](.*?' . preg_quote($search, '/') . '.*?)[\'"][^>]*>/is';
             $html = preg_replace($iframePattern, '<iframe src="---"></iframe>', $html);
 
@@ -17,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $html = preg_replace($insideScript, '<script ></script>', $html);
         }
     }
-
     echo $html;
 }
 ?>
