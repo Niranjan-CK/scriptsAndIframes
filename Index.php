@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 else{
 
-                    $html = preg_replace($iframePattern, '$1"' . '' . '"', $html); // Perform the replacement
+                    $html = preg_replace($iframePattern, '', $html); // Perform the replacement
 
 
                 }
